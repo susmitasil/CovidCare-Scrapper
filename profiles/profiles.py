@@ -32,7 +32,7 @@ def rec_get_posts(driver, profiles):
         driver.get(url +profiles[0] + '/')
 
         get_posts_from_stories(driver, profiles[0])
-        # get_posts_from_posts(driver, profiles[0])
+        get_posts_from_posts(driver, profiles[0])
         profiles.pop(0)
 
     rec_get_posts(driver, profiles)

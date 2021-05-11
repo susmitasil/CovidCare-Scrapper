@@ -32,7 +32,6 @@ try:
     print('in')
     driver.get(url)
 except:
-    # driver.add_cookie({'name':'sessionid','value': None})
     print('out')
     driver.get(url)
 
@@ -69,7 +68,8 @@ print(session)
 file=open("session.txt", "w")
 file.write(json.dumps(session))
 file.close()
-# get_posts_by_hashtags(driver)
+
+get_posts_by_hashtags(driver)
 get_posts_from_profiles(driver)
 
 

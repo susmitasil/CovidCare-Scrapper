@@ -47,7 +47,9 @@ def get_posts_from_hashtag(driver, keyword):
     # path = os.getcwd()
     path = os.path.dirname(__file__)
     path = os.path.join(path,"../data_collected/hashtags/"+ keyword[1:])
-    os.mkdir(path)
+    if not os.path.exists(path):
+        os.makedirs(path)
+        # os.mkdir(path)
 
     counter = 0
 

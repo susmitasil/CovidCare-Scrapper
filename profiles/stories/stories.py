@@ -27,7 +27,9 @@ def get_posts_from_stories(driver,profile):
 
     path = os.path.dirname(__file__)
     path = os.path.join(path, "../../data_collected/stories/"+ profile)
-    os.mkdir(path)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    # os.mkdir(path)
 
     
     def get_story_image(counter):

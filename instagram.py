@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 import os
+import json
 import wget
 import time
 from hashtags.hashtags import *
@@ -14,53 +15,71 @@ options = webdriver.ChromeOptions()
 options.add_argument("--remote-debugging-port=8000")
 driver = webdriver.Chrome(r'D:/python\Web_Scrapping/chromedriver.exe', chrome_options=options)
 
-driver.get(url)
+# path = os.path.dirname(__file__)
+# print(path)
+# path = os.path.join(path,"../CovidResources/shared/session/")
+# file=open( path +"session.txt", "r")
+# reader = file.read()
+# file.close()
+file=open("session.txt", "r")
+reader = json.loads(file.read())
+file.close()
+reader = reader['value']
+
 driver.maximize_window()
-username = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='username']")))
-password = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='password']")))
+try:
+    driver.add_cookie({'name':'sessionid','value': reader})
+    print('in')
+    driver.get(url)
+except:
+    print('out')
+    driver.get(url)
 
-username.clear()
-password.clear()
 
-username.send_keys('covid.locator')
-password.send_keys('susmita1')
 
-log_in = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
-not_now = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]"))).click()
-not_now2 = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]"))).click()
+
+
+
+check_log_in = driver.get_cookie('sessionid')
+
+print(check_log_in)
+
+
+def log_in_to_insta(driver):
+    username = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='username']")))
+    password = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='password']")))
+
+    username.clear()
+    password.clear()
+
+    username.send_keys('covid.locator')
+    password.send_keys('susmita1')
+
+    log_in = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
+    not_now = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]"))).click()
+    not_now2 = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]"))).click()
+
+if(check_log_in == None):
+    log_in_to_insta(driver)
+
+session = driver.get_cookie('sessionid')
+print(session)
+
+file=open("session.txt", "w")
+file.write(json.dumps(session))
+file.close()
 
 get_posts_by_hashtags(driver)
-# get_posts_from_profiles(driver)
+get_posts_from_profiles(driver)
 
-# searchbox = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@placeholder='Search']")))
-# searchbox.clear()
 
-# keyword = '#cat'
-# searchbox.send_keys(keyword)
-# time.sleep(2)
-# print('start enter')
-# searchbox.send_keys(Keys.ENTER)
-# time.sleep(1)
-# searchbox.send_keys(Keys.ENTER)
-# # searchbox.send_keys(Keys.ENTER)
-# # searchbox.send_keys(Keys.ENTER)
-# print('stop enter')
-# time.sleep(5)
 # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 # # driver.execute_script("window.scrollTo(0,4000);")
 # images = driver.find_elements_by_tag_name('img')
 # images = [image.get_attribute('src') for image in images]
-# # anchors = driver.find_elements_by_tag_name('a')
-# # print(anchors)
-# # anchors = [a.get_attribute('href') for a in anchors]
-
 # # print(types)
 # # types = driver.find_elements_by_xpath("//a[@type]")
 # # print(types)
-
-# path = os.getcwd()
-# path = os.path.join(path, keyword[1:] +"s")
-# os.mkdir(path)
 
 # # counter =0 
 # # for post in anchors:

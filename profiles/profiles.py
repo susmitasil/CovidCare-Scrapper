@@ -15,7 +15,7 @@ from shared.readCsv.readCsv import *
 def get_posts_from_profiles(driver):
     
     profiles = read_info_from_csv('profiles')
-    
+
     # profile = 'covidaidresources'
     # driver.get(url +profile + '/')
 

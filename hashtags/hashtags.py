@@ -7,10 +7,28 @@ import os
 import wget
 import time
 from setup.setup import *
+from shared.readCsv.readCsv import *
+import random
+
 
 def get_posts_by_hashtags(driver):
-    
-    keyword = '#covid_resources'
+
+    hashtags = read_info_from_csv('hashtags')
+    rec_get_posts(driver,hashtags)
+
+def rec_get_posts(driver, hashtags):
+
+    if(len(hashtags)==0):
+        return
+    else:
+
+    # keyword = '#covid_resources'
+        keyword = hashtags[0]
+        get_posts_from_hashtag(driver, keyword)
+        hashtags.pop(0)
+    rec_get_posts(driver, hashtags)
+
+def get_posts_from_hashtag(driver, keyword):
 
     driver.get(urls['hashtag_url'] +keyword[1:])
 
@@ -49,8 +67,9 @@ def get_posts_by_hashtags(driver):
         counter += 1
         next_up = driver.find_elements_by_xpath(
             "//button[contains(@class, '_6CZji')][@tabindex='-1']/div[contains(@class,'coreSpriteRightChevron')]")
-        print('----------------------------------------------------------------------')
+        # print('----------------------------------------------------------------------')
         print(next_up)
+        # rand = random.randint(0,9)
         while(next_up):
             if(len(next_up) == 1):
                 next_up[0].click()

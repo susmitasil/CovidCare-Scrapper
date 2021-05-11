@@ -30,7 +30,8 @@ not_now = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, 
 not_now2 = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]"))).click()
 
 get_posts_by_hashtags(driver)
-get_posts_from_profiles(driver)
+# get_posts_from_profiles(driver)
+
 # searchbox = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@placeholder='Search']")))
 # searchbox.clear()
 

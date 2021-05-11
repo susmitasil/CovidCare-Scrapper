@@ -56,9 +56,9 @@ def get_posts_from_stories(driver,profile):
             next_up[0].click()
             get_story_image(counter)
             counter += 1
-        elif(len(next_up) > 1):
-            next_up[1].click()
-            get_story_image(counter)
-            counter += 1
+        # elif(len(next_up) > 1):
+        #     next_up[1].click()
+        #     get_story_image(counter)
+        #     counter += 1
 
         next_up = driver.find_elements_by_xpath("//button[@class='FhutL']")

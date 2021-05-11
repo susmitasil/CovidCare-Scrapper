@@ -10,6 +10,7 @@ def read_info_from_csv(location):
     reader = csv.reader(file)
 
     req_list = [line[0] for line in reader]
+    file.close()
     return(req_list[1:])
     # return(req_list)
 

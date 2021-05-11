@@ -26,35 +26,36 @@ def get_posts_from_posts(driver, profile):
 
     counter = 0
 
-    def get_single_image(counter):
+    def get_single_image(counter, shortcode):
         images = driver.find_elements_by_tag_name('img')
 
         images = [image.get_attribute('src') for image in images]
     # print(images)
-        save_as = os.path.join(path, profile + str(counter) + '.jpg')
+        save_as = os.path.join(path, str(shortcode)+"_"+ str(counter) + '.jpg')
         wget.download(images[1], save_as)
 
 
     for post in anchors:
         driver.get(post)
         time.sleep(0.5)
-        get_single_image(counter)
+        shortcode = driver.current_url.split("/")[-2]
+        get_single_image(counter, shortcode)
         counter += 1
         next_up = driver.find_elements_by_xpath(
             "//button[contains(@class, '_6CZji')][@tabindex='-1']/div[contains(@class,'coreSpriteRightChevron')]")
         print('----------------------------------------------------------------------')
         print(next_up)
         while(next_up):
-            if(len(next_up) == 1):
-                next_up[0].click()
-                time.sleep(0.5)
-                get_single_image(counter)
-                counter += 1
-            elif(len(next_up) > 1):
-                next_up[1].click()
-                time.sleep(0.5)
-                get_single_image(counter)
-                counter += 1
+            # if(len(next_up) == 1):
+            next_up[0].click()
+            time.sleep(0.5)
+            get_single_image(counter,shortcode)
+            counter += 1
+            # elif(len(next_up) > 1):
+            #     next_up[1].click()
+            #     time.sleep(0.5)
+            #     get_single_image(counter)
+            #     counter += 1
 
             next_up = driver.find_elements_by_xpath(
                 "//button[contains(@class, '_6CZji')][@tabindex='-1']/div[contains(@class,'coreSpriteRightChevron')]")

@@ -30,37 +30,16 @@ not_now = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, 
 not_now2 = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]"))).click()
 
 get_posts_by_hashtags(driver)
-# get_posts_from_profiles(driver)
+get_posts_from_profiles(driver)
 
-# searchbox = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@placeholder='Search']")))
-# searchbox.clear()
 
-# keyword = '#cat'
-# searchbox.send_keys(keyword)
-# time.sleep(2)
-# print('start enter')
-# searchbox.send_keys(Keys.ENTER)
-# time.sleep(1)
-# searchbox.send_keys(Keys.ENTER)
-# # searchbox.send_keys(Keys.ENTER)
-# # searchbox.send_keys(Keys.ENTER)
-# print('stop enter')
-# time.sleep(5)
 # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 # # driver.execute_script("window.scrollTo(0,4000);")
 # images = driver.find_elements_by_tag_name('img')
 # images = [image.get_attribute('src') for image in images]
-# # anchors = driver.find_elements_by_tag_name('a')
-# # print(anchors)
-# # anchors = [a.get_attribute('href') for a in anchors]
-
 # # print(types)
 # # types = driver.find_elements_by_xpath("//a[@type]")
 # # print(types)
-
-# path = os.getcwd()
-# path = os.path.join(path, keyword[1:] +"s")
-# os.mkdir(path)
 
 # # counter =0 
 # # for post in anchors:

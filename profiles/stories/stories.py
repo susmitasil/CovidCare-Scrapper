@@ -29,13 +29,12 @@ def get_posts_from_stories(driver,profile):
     path = os.path.join(path, "../../data_collected/stories/"+ profile)
     os.mkdir(path)
 
-    counter = 0
-
-
+    
     def get_story_image(counter):
         images = driver.find_elements_by_tag_name('img')
+        shortcode = driver.current_url.split("/")[-2]
         images = [image.get_attribute('src') for image in images]
-        save_as = os.path.join(path, profile + str(counter) + '.jpg')
+        save_as = os.path.join(path, str(shortcode)+ "_" + str(counter) + '.jpg')
         wget.download(images[0], save_as)
     # counter +=1
 
@@ -45,6 +44,8 @@ def get_posts_from_stories(driver,profile):
         EC.element_to_be_clickable((By.XPATH, "//div[@role='button']"))).click()
     time.sleep(5)
 
+    counter = 0
+    
     get_story_image(counter)
     counter += 1
 

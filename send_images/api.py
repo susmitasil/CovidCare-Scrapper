@@ -1,6 +1,7 @@
 import requests
 import os
-from csv import *
+# from csv import *
+import csv
 
 url = 'http://covidtextlabel.centralindia.cloudapp.azure.com:5000/add'
 
@@ -38,13 +39,14 @@ def collect_records(json_data):
     folder = os.path.join(path,'data_collected\\records\\')
     field_names = ['help_cat','help_type','loc','loc_extra','nums','per','text','tid','time']
 
-    with open(folder+'records.csv', 'a') as f_object:
+    with open(folder+'record.csv', 'a') as f_object:
 
     # Pass the file object and a list 
     # of column names to DictWriter()
     # You will get a object of DictWriter
-        dictwriter_object = DictWriter(f_object, fieldnames=field_names)
-  
+        dictwriter_object = csv.DictWriter(f_object, fieldnames=field_names)
+        # Tot_rows=len(dictwriter_object) 
+        # print(Tot_rows)
     #Pass the dictionary as an argument to the Writerow()
         dictwriter_object.writerow(json_data)
   
@@ -56,4 +58,4 @@ def collect_records(json_data):
 	#     Rows=list(Reader) 
 	#     Tot_rows=len(Rows) 
 
-    
+# collect_records({'help_cat':'hi','help_type':'hi','loc':'hi','loc_extra':'hi','nums':'hi','per':'hi','text':'hi','tid':'hi','time':'hi'})

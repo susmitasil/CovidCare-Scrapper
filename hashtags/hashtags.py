@@ -9,7 +9,8 @@ import time
 from setup.setup import *
 from shared.readCsv.readCsv import *
 import random
-
+import requests
+from send_images.api import *
 
 def get_posts_by_hashtags(driver):
 
@@ -60,6 +61,7 @@ def get_posts_from_hashtag(driver, keyword):
     # print(images)
         save_as = os.path.join(path, str(shortcode)+ "_" + str(counter) + '.jpg')
         wget.download(images[1], save_as)
+        upload_single_file(save_as)
 
 
     for post in anchors:

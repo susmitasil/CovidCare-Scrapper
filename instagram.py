@@ -69,7 +69,7 @@ file=open("session.txt", "w")
 file.write(json.dumps(session))
 file.close()
 
-get_posts_by_hashtags(driver)
+# get_posts_by_hashtags(driver)
 get_posts_from_profiles(driver)
 
 

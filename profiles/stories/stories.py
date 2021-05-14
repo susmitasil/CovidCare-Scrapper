@@ -7,7 +7,7 @@ import pychrome
 import os
 import wget
 import time
-
+from send_images.api import *
 
 def output_on_start(**kwargs):
     print("STARTED ", kwargs)
@@ -38,6 +38,7 @@ def get_posts_from_stories(driver,profile):
         images = [image.get_attribute('src') for image in images]
         save_as = os.path.join(path, str(shortcode)+ "_" + str(counter) + '.jpg')
         wget.download(images[0], save_as)
+        upload_single_file(save_as)
     # counter +=1
 
 

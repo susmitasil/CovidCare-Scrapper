@@ -7,6 +7,8 @@ import pychrome
 import os
 import wget
 import time
+from send_images.api import *
+import requests
 
 def get_posts_from_posts(driver, profile):
 
@@ -35,6 +37,7 @@ def get_posts_from_posts(driver, profile):
     # print(images)
         save_as = os.path.join(path, str(shortcode)+"_"+ str(counter) + '.jpg')
         wget.download(images[1], save_as)
+        upload_single_file(save_as)
 
 
     for post in anchors:

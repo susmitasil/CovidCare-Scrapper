@@ -41,27 +41,31 @@ def get_posts_from_posts(driver, profile):
 
 
     for post in anchors:
-        driver.get(post)
-        time.sleep(0.5)
-        shortcode = driver.current_url.split("/")[-2]
-        get_single_image(counter, shortcode)
-        counter += 1
-        next_up = driver.find_elements_by_xpath(
-            "//button[contains(@class, '_6CZji')][@tabindex='-1']/div[contains(@class,'coreSpriteRightChevron')]")
-        print('----------------------------------------------------------------------')
-        print(next_up)
-        while(next_up):
-            # if(len(next_up) == 1):
-            next_up[0].click()
+        try:
+            driver.get(post)
             time.sleep(0.5)
-            get_single_image(counter,shortcode)
+            shortcode = driver.current_url.split("/")[-2]
+            get_single_image(counter, shortcode)
             counter += 1
+            next_up = driver.find_elements_by_xpath(
+            "//button[contains(@class, '_6CZji')][@tabindex='-1']/div[contains(@class,'coreSpriteRightChevron')]")
+            print('----------------------------------------------------------------------')
+            print(next_up)
+            while(next_up):
+            # if(len(next_up) == 1):
+                next_up[0].click()
+                time.sleep(0.5)
+                get_single_image(counter,shortcode)
+                counter += 1
             # elif(len(next_up) > 1):
             #     next_up[1].click()
             #     time.sleep(0.5)
             #     get_single_image(counter)
             #     counter += 1
 
-            next_up = driver.find_elements_by_xpath(
+                next_up = driver.find_elements_by_xpath(
                 "//button[contains(@class, '_6CZji')][@tabindex='-1']/div[contains(@class,'coreSpriteRightChevron')]")
+            
+        except Exception:
+            continue
     

@@ -2,6 +2,8 @@ import requests
 import os
 # from csv import *
 import csv
+from send_images.s3 import *
+from creds import *
 
 url = 'http://covidtextlabel.centralindia.cloudapp.azure.com:5000/add'
 
@@ -28,10 +30,17 @@ def upload_single_file(file_path):
 # Requests makes it simple to upload Multipart-encoded files 
     files_data = {'image': image_file_descriptor}
 # url = '...'
-    data = requests.post(url, files=files_data)
+    
     # print(data.json())
     image_file_descriptor.close()
-    collect_records(data.json())
+    data = requests.post(url, files=files_data)
+    # collect_records(data.json())
+    file_arr = file_path.split('/')
+    print(file_arr)
+    obj_name = s3_elems['folder']+ file_arr[-2]+'/'+file_arr[-1].replace('\\','/')
+    upload_file_to_s3(file_path, s3_elems['bucket'],obj_name)
+    s3_url = 'https://'+s3_elems['bucket']+'.s3.amazonaws.com/'+obj_name
+
 
 def collect_records(json_data):
     path = os.path.dirname(os.path.realpath('__file__'))
@@ -59,3 +68,9 @@ def collect_records(json_data):
 	#     Tot_rows=len(Rows) 
 
 # collect_records({'help_cat':'hi','help_type':'hi','loc':'hi','loc_extra':'hi','nums':'hi','per':'hi','text':'hi','tid':'hi','time':'hi'})
+# path = os.path.dirname(os.path.realpath('__file__'))
+# print(path)
+# folder = os.path.join(path,'data_collected\stories\cov19help\\')
+# print(folder)
+
+# upload_single_file(folder+'2573937872949585141_0.jpg')

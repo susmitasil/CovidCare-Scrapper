@@ -1,1 +1,0 @@
-{"domain": ".instagram.com", "expiry": 1652618359, "httpOnly": true, "name": "sessionid", "path": "/", "secure": true, "value": "47683112370%3APzwwvCz1LwZyVZ%3A13"}

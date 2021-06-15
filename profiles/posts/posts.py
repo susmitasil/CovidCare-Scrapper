@@ -28,7 +28,7 @@ def get_posts_from_posts(driver, profile):
         os.makedirs(path)
     # os.mkdir(path)
 
-    counter = 0
+    
 
     def get_single_image(counter, shortcode):
         images = driver.find_elements_by_tag_name('img')
@@ -41,6 +41,7 @@ def get_posts_from_posts(driver, profile):
 
 
     for post in anchors:
+        counter = 0
         try:
             driver.get(post)
             time.sleep(0.5)

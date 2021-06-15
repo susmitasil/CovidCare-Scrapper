@@ -37,8 +37,11 @@ def get_posts_from_stories(driver,profile):
         shortcode = driver.current_url.split("/")[-2]
         images = [image.get_attribute('src') for image in images]
         save_as = os.path.join(path, str(shortcode)+ "_" + str(counter) + '.jpg')
-        wget.download(images[0], save_as)
-        upload_single_file(save_as)
+        try:
+            wget.download(images[0], save_as)
+            upload_single_file(save_as)
+        except Exception:
+            pass
     # counter +=1
 
 

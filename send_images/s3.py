@@ -12,7 +12,7 @@ def upload_file_to_s3(file_name, bucket, object_name=None):
     :param object_name: S3 object name. If not specified then file_name is used
     :return: True if file was uploaded, else False
     """
-
+    print('upload')
     # If S3 object_name was not specified, use file_name
     if object_name is None:
         object_name = s3_elems['folder']+ file_name

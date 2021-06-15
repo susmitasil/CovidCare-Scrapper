@@ -10,6 +10,9 @@ import time
 from hashtags.hashtags import *
 from profiles.profiles import *
 from setup.setup import *
+from dotenv import dotenv_values
+
+config = dotenv_values(".env")
 
 options = webdriver.ChromeOptions()
 options.add_argument("--remote-debugging-port=8000")
@@ -26,7 +29,7 @@ reader = json.loads(file.read())
 file.close()
 reader = reader['value']
 
-driver.maximize_window()
+
 try:
     driver.add_cookie({'name':'sessionid','value': reader})
     print('in')
@@ -34,6 +37,7 @@ try:
 except:
     print('out')
     driver.get(url)
+    driver.maximize_window()
 
 
 
@@ -52,8 +56,8 @@ def log_in_to_insta(driver):
     username.clear()
     password.clear()
 
-    username.send_keys('covid.locator')
-    password.send_keys('susmita1')
+    username.send_keys(config['USER'])
+    password.send_keys(config['PASSWORD'])
 
     log_in = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
     not_now = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Not Now')]"))).click()

@@ -4,3 +4,5 @@ __pycache__/
 
 /session.txt
 /creds.py
+
+.env*
